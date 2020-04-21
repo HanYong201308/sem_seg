@@ -16,6 +16,7 @@ from modules.loss import CEDiceLoss, BCEDiceLoss
 from modules.datasets import Segmentation_dataset
 from modules.transforms import original_transform, teacher_transform
 from models.unet import UNet
+from models.unet_2 import unet
 from models.fcn import fcn8s
 from models.segnet import segnet
 base_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) # /unet
@@ -31,7 +32,7 @@ train_loader = torch.utils.data.DataLoader(datasets, batch_size=4, shuffle=True)
 
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-model = UNet(n_channels=3, n_classes=21).to(device)
+model = unet(in_channels=3, n_classes=21).to(device)
 criterion = BCEDiceLoss().to(device)
 
 
@@ -51,7 +52,7 @@ log_name = "{}{:02}{:02}_{:02}_{}".format(dt.year, dt.month, dt.day, model_id, m
 log_path = os.path.join(logdir_path, log_name)
 writer = SummaryWriter(log_dir=log_path)
 
-epochs = 2
+epochs = 20
 
 
 def adjust_learning_rate(optimizer, epoch):

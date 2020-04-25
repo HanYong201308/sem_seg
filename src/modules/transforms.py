@@ -20,7 +20,7 @@ class CenterCrop(object):
 
 original_transform = transforms.Compose([
 CenterCrop(),
-transforms.Resize((512, 512), interpolation=2),
+transforms.Resize((256, 256), interpolation=2),
 transforms.ToTensor(),
 ])
 
@@ -64,7 +64,7 @@ class onehot(object):
 
 teacher_transform = transforms.Compose([
 CenterCrop(),
-transforms.Resize((512, 512), interpolation=2),
+transforms.Resize((256, 256), interpolation=2),
 void2background(),
 totensor_without_normalize(),
 onehot(),

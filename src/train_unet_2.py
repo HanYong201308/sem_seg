@@ -36,7 +36,6 @@ model = unet(in_channels=3, n_classes=21).to(device)
 criterion = BCEDiceLoss().to(device)
 
 
-
 optimizer = optim.Adam(model.parameters(), lr=0.001)
 
 
@@ -44,7 +43,7 @@ optimizer = optim.Adam(model.parameters(), lr=0.001)
 # logdir = "logs"
 # logdir_path = os.path.join(base_path, logdir)
 logdir_path = "./logs"
-if not os.path.isdir(logdir_path): 
+if not os.path.isdir(logdir_path):
     os.mkdir(logdir_path)
 dt = datetime.datetime.now()
 model_id = len(glob.glob(os.path.join(logdir_path, "{}{}{}*".format(dt.year, dt.month, dt.day))))

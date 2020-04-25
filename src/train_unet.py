@@ -35,7 +35,6 @@ model = UNet(n_channels=3, n_classes=21).to(device)
 criterion = BCEDiceLoss().to(device)
 
 
-
 optimizer = optim.Adam(model.parameters(), lr=0.001)
 
 

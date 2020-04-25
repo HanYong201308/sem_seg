@@ -130,7 +130,7 @@ def train(epoch):
 
 def save(epoch):
     checkpoint_path = os.path.join(base_path, "checkpoints")
-    save_file = "checkpoint.pth.tar"
+    save_file = "checkpoint2.pth.tar"
     if not os.path.exists(checkpoint_path):
         os.makedirs(checkpoint_path)
     if not os.path.exists(os.path.join(checkpoint_path, log_name)):

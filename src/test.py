@@ -33,8 +33,10 @@ if not os.path.exists(dataroot):
 datasets = torchvision.datasets.VOCSegmentation(dataroot, year='2012', image_set='train', download=False, transform=original_transform, target_transform=teacher_transform)
 
 train_loader = torch.utils.data.DataLoader(datasets, batch_size=1, shuffle=False)
+# valloader = torch.utils.data.DataLoader(datasets, batch_size=1, shuffle=False)
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-model = UNet(n_channels=3, n_classes=21)#.cuda()
+model = UNet(n_channels=3, n_classes=21)#.to(device)
 
 model.load_state_dict(torch.load(checkpoint_path))
 
@@ -43,7 +45,7 @@ with torch.no_grad():
     # data, target = iter(train_loader).next()
     abab = 0
     for data, target in train_loader:
-        # output = model(data).data
+        output = model(data).data
         abab += 1
     # data = data.cuda()
     # output = model(data).data  # [4, 21, 512, 512]

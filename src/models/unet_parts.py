@@ -62,7 +62,7 @@ class down(nn.Module):
     def __init__(self, in_ch, out_ch):
         super(down, self).__init__()
         self.mpconv = nn.Sequential(
-            nn.MaxPool2d(4),
+            nn.MaxPool2d(2),
             double_conv(in_ch, out_ch)
         )
 
@@ -118,7 +118,7 @@ class up(nn.Module):
 
 class up2(nn.Module):
     def __init__(self, in_ch, out_ch, bilinear=True):
-        super(up, self).__init__()
+        super(up2, self).__init__()
 
         #  would be a nice idea if the upsampling could be learned too,
         #  but my machine do not have enough memory to handle all those weights

@@ -158,7 +158,7 @@ def train(epoch):
             writer_fcn8.add_scalar("validation/dice_coeff_fcn8", mean_dice_coeff_fcn8, (len(train_loader) * (epoch - 1) + batch_idx))
             writer_segnet.add_scalar("validation/val_loss_segnet", mean_val_loss_segnet, (len(train_loader) * (epoch - 1) + batch_idx))
             writer_segnet.add_scalar("validation/dice_coeff_segnet", mean_dice_coeff_segnet, (len(train_loader) * (epoch - 1) + batch_idx))
-            print('Train Epoch: {:>3} [{:>5}/{:>5} ({:>3.0f}%)]\ttrain_loss for Unet: {:>2.4f}\t    train_loss for '
+            print('Train Epoch for UNet: {:>3} [{:>5}/{:>5} ({:>3.0f}%)]\ttrain_loss for Unet: {:>2.4f}\t    train_loss for '
                   'fcn8: {:>2.4f}\t    train_loss for segnet: {:>2.4f}'.format(
                 epoch,
                 batch_idx * len(data), len(train_loader.dataset), 100. * batch_idx / len(train_loader),
@@ -201,6 +201,9 @@ if __name__ == "__main__":
     writer_unet.add_graph(model, (dummy,))
     writer_fcn8.add_graph(model_fcn8, (dummy, ))
     writer_segnet.add_graph(model_segnet, (dummy, ))
+    print('# Model_UNet parameters:', sum(param.numel() for param in model.parameters()))
+    print('# Model_fcn8 parameters:', sum(param.numel() for param in model_fcn8.parameters()))
+    print('# Model_segnet parameters:', sum(param.numel() for param in model_segnet.parameters()))
     for epoch in epoch_range:
         train(epoch)
         save(epoch)

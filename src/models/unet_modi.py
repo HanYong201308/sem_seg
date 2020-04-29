@@ -81,11 +81,11 @@ class UNet_3(nn.Module):
         self.down2 = down_simple(128, 256)
         self.down3 = down_simple(256, 512)
         self.down4 = down_simple(512, 512)
-        self.up1 = up_simple(1024, 256)
-        self.up2 = up_simple(512, 128)
-        self.up3 = up_simple(256, 64)
-        self.up4 = up_simple(128, 64)
-        self.outc = outconv_simple(64, n_classes)
+        self.up1 = up(1024, 256)
+        self.up2 = up(512, 128)
+        self.up3 = up(256, 64)
+        self.up4 = up(128, 64)
+        self.outc = outconv(64, n_classes)
 
     def forward(self, x):
         x1 = self.inc(x)
